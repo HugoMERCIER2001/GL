@@ -64,7 +64,7 @@ public class Flottant{
         float terme = (float) this.x;//On commence avec le terme pour n = 0 dans le développement en série entière du sinus.
         Flottant sommeFlottant = new Flottant(somme);//typa en Flottant obligatoire pour la méthode getUlp.
         int compteur = 0;
-        while(sommeFlottant.getUlp() <= (float) Math.abs(terme)){ //Tant que U_n <= a_n ...
+        while((sommeFlottant.getUlp()) <= (float) Math.abs(terme)){ //Tant que U_n <= a_n ...
             somme += terme;
             compteur += 1;
             float terme1 = (float) Math.pow(-1, compteur);
