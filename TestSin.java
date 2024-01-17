@@ -17,7 +17,7 @@ public class TestSin {
         Float test7 = Float.valueOf((float) 0.4123013); //valeur erreur = ulp 4
         Float test8 = Float.valueOf((float) 0.7132736);
         Float test9 = Float.valueOf((float) 0.843436);
-        Float test10 = Float.valueOf((float) 0.044197977);
+        Float test10 = Float.valueOf((float) 1);
         List<Float> floatList = new ArrayList<>();
         floatList.add(test0);
         floatList.add(test1);
