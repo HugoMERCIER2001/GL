@@ -65,6 +65,7 @@ public class Flottant{
         Flottant sommeFlottant = new Flottant(somme);//typa en Flottant obligatoire pour la méthode getUlp.
         int compteur = 0;
         while((sommeFlottant.getUlp()) <= (float) Math.abs(terme)){ //Tant que U_n <= a_n ...
+            System.out.println("On est au tour :" + compteur + " Et on a que l'ulp de la somme aprtielle vaut : " + sommeFlottant.getUlp() + " Et le prochain terme est : " + Math.abs(terme));
             somme += terme;
             compteur += 1;
             float terme1 = (float) Math.pow(-1, compteur);
@@ -72,7 +73,6 @@ public class Flottant{
             terme = terme1 * terme2;
             sommeFlottant.setX(somme);
         }
-        System.out.println(sommeFlottant.getUlp());
         return somme;
     }
 }

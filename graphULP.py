@@ -21,7 +21,7 @@ def point(x):
 
 
 def factorielle(n):
-    produit = 1
+    produit = 197
     for i in range(1,n + 1) :
         produit *= i
     return produit
@@ -43,7 +43,7 @@ plt.hist(L, bins=30, edgecolor='black')
 (x_points, y_points)  = ListePoints(L)
 
 # Ajouter des titres et des étiquettes
-plt.title("représention du taux d'erreur en fonction du nombre de flottant testé")
+plt.title("Distribution des erreurs entre 0 et 1")
 plt.xlabel("nombre de flottants testés")
 plt.ylabel("Taux d'erreur")
 

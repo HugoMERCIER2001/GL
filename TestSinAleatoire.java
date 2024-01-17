@@ -16,19 +16,23 @@ public class TestSinAleatoire {
             int nbrErreur = 0;
             int nbrErreurUlp = 0;
             for(int j = 0; j < i; j++){
-                float RandomFloat = random.nextFloat();
+                System.out.println("on est au tour " + j);
+                float RandomFloat = ((float) Math.PI * random.nextFloat());
+                System.out.println("On pase le cap 2");
                 Flottant Test1 = new Flottant(RandomFloat);
+                System.out.println("Valeur testée" + RandomFloat);
+                System.out.println("On pase le cap 3");
                 float erreur = Test1.getSinus() - (float) Math.sin((double) Test1.getX());
+                System.out.println("On pase le cap 4");
                 Flottant Sinus = new Flottant(Test1.getSinus());
+                System.out.println("On pase le cap 5");
                 if(erreur != 0){
+                    System.out.println("On pase le cap 6");
                     nbrErreur += 1;
-                    if(Math.abs(erreur) == Sinus.getUlp()){
-                        nbrErreurUlp += 1;
-                    }
+                    valeurs += RandomFloat + ", ";
                 }
             }
-            System.out.println(nbrErreur);
-            System.out.println(nbrErreur - nbrErreurUlp);
+            System.out.println(valeurs);
         }
     }        
 }
