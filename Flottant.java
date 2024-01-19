@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Flottant{
     private float x;
 
@@ -67,14 +69,22 @@ public class Flottant{
         float terme = (float) this.x;//On commence avec le terme pour n = 0 dans le développement en série entière du sinus.
         Flottant sommeFlottant = new Flottant(somme);//typa en Flottant obligatoire pour la méthode getUlp.
         int compteur = 0;
-        while((sommeFlottant.getUlp()) <= (float) Math.abs(terme) || compteur <= 7){ //Tant que U_n <= a_n ...
+        ArrayList<Float> listeTerms = new ArrayList<>();
+        while((sommeFlottant.getUlp()) <= (float) Math.abs(terme)){ //Tant que U_n <= a_n ...
             somme += terme;
+            listeTerms.add(terme);
             compteur += 1;
             float terme1 = (float) Math.pow(-1, compteur);
             float terme2 = (float) Math.pow(this.x, 2 * compteur + 1)/this.factorielle(2 * compteur + 1);
-            terme = terme1 * class Double on a que l'ulp de la somme partielle vaut : " + sommeFlottant.getUlp() + " Et le prochain terme est : " + Math.abs(terme));
-        return somme;
+            terme = terme1 * terme2;
+            sommeFlottant.setX(somme);
         }
+        float sommeFinale = 0.0f;
+        for (int i = listeTerms.size() - 1; i >= 0; i--){
+            sommeFinale += listeTerms.get(i);
+            System.out.println("" + listeTerms.get(i));
+        }
+        return sommeFinale;
     }
 
     public float getCosinus(){
@@ -87,16 +97,24 @@ public class Flottant{
         float terme = 1.0f;//On commence avec le terme pour n = 0 dans le développement en série entière du sinus.
         Flottant sommeFlottant = new Flottant(somme);//typa en Flottant obligatoire pour la méthode getUlp.
         int compteur = 0;
-        while((sommeFlottant.getUlp()) <= (float) Math.abs(terme) || compteur <= 14){ //Tant que U_n <= a_n ...
+        ArrayList<Float> listeTerms = new ArrayList<>();
+        while((sommeFlottant.getUlp()) <= (float) Math.abs(terme) || compteur <= 5){ //Tant que U_n <= a_n ...
             somme += terme;
+            listeTerms.add(terme);
             compteur += 1;
             float terme1 = (float) Math.pow(-1, compteur);
             float terme2 = (float) Math.pow(this.x, 2 * compteur)/this.factorielle(2 * compteur);
             terme = terme1 * terme2;
             sommeFlottant.setX(somme);
+            System.out.println("terme" + terme);
+        }
+        float sommeFinale = 0.0f;
+        for (int i = listeTerms.size() - 1; i >= 0; i--){
+            sommeFinale += listeTerms.get(i);
+            System.out.println("" + listeTerms.get(i));
         }
         System.out.println(" Et on a que l'ulp de la somme partielle vaut : " + sommeFlottant.getUlp() + "et le vrai ULP vaut : " + Math.ulp( sommeFlottant.getX()) + "\n Et le prochain terme est : " + Math.abs(terme));
-        return somme;
+        return sommeFinale;
     }
 }
 

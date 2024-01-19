@@ -40,7 +40,7 @@ def ListePoints(L):
     return (ListeAbsice, ListeOrdonnée)
 
 y_points = [0.3981, 0.3877, 0.3820, 0.3862, 0.4011, 0.3835, 0.3872, 0.3913, 0.3877, 0.3890, 0.3909]
-x_points = [4, 5, 6, 7 , 8, 9, 10, 11, 12, 13, 14]
+x_points = [i for i in range(1, 10001)]
 plt.plot(x_points, y_points)
 plt.yticks(np.arange(0, 1.1, 0.1))
 # Ajouter des titres et des étiquettes

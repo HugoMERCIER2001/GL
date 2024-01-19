@@ -10,7 +10,7 @@ public class TestSinAleatoire {
         for(int i = 0; i < N; i++){
             tableauErreur[i] = 0;
         }
-        for(int i = N-1; i < N; i++){
+        for(int i = 5000; i < N; i++){
             System.out.println("" + i);
             Random random = new Random();
             int nbrErreur = 0;
@@ -24,7 +24,8 @@ public class TestSinAleatoire {
                     nbrErreur += 1;
                 }
             }
-            System.out.println(nbrErreur);
+            valeurs += nbrErreur + ", ";
         }
+        System.out.println(valeurs);
     }        
 }
