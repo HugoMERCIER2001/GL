@@ -10,22 +10,23 @@ public class TestSinAleatoire {
         for(int i = 0; i < N; i++){
             tableauErreur[i] = 0;
         }
-        for(int i = 5000; i < N; i++){
-            System.out.println("" + i);
+        for(int i = N-1; i < N; i++){
+            float Pi = (float) Math.PI;
             Random random = new Random();
-            int nbrErreur = 0;
             int nbrErreurUlp = 0;
+            int nbrErreur = 0;
             for(int j = 0; j < i; j++){
-                float RandomFloat = random.nextFloat();
+                float RandomFloat = -random.nextFloat();
+                System.out.println("" + RandomFloat);
                 Flottant Test1 = new Flottant(RandomFloat);
                 float erreur = Test1.getSinus() - (float) Math.sin((double) Test1.getX());
                 Flottant Sinus = new Flottant(Test1.getSinus());
+                valeurs += Test1.getSinus() + ", ";
                 if(erreur != 0){
                     nbrErreur += 1;
                 }
             }
-            valeurs += nbrErreur + ", ";
+            System.out.println(nbrErreur);
         }
-        System.out.println(valeurs);
     }        
 }

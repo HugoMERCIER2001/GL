@@ -17,7 +17,7 @@ public class TestSin {
         Float test7 = Float.valueOf((float) 0.4123013); //valeur erreur = ulp 4
         Float test8 = Float.valueOf((float) 0.7132736);
         Float test9 = Float.valueOf((float) 0.843436);
-        Float test10 = Float.valueOf((float) 1);
+        Float test10 = Float.valueOf((float) Math.PI / 2);
         List<Float> floatList = new ArrayList<>();
         floatList.add(test0);
         floatList.add(test1);
@@ -37,6 +37,8 @@ public class TestSin {
             Flottant Test1 = new Flottant(floatList.get(i));
             System.out.println("Float " + Test1.getX());
             float erreur = Test1.getSinus() - (float) Math.sin((double) Test1.getX());
+            Flottant Sinus = new Flottant(Test1.getSinus());
+            System.out.println("Et l'ULP du sinus vaut : " + Sinus.getUlp());
             System.out.println("sinus attendu " + (float) Math.sin((double) Test1.getX()));
             System.out.println("l'écart de l'erreur est de :" + erreur);
             System.out.println("---------------------------------------------------");

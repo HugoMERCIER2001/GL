@@ -19,7 +19,6 @@ public class TestCosinusAleatoire {
                 float RandomFloat = random.nextFloat();
                 Flottant Test1 = new Flottant(RandomFloat);
                 float erreur = Test1.getCosinus() - (float) Math.cos((double) Test1.getX());
-                System.out.println("la valeur de l'erreur est : " + erreur);
                 Flottant Cosinus = new Flottant(Test1.getCosinus());
                 if(erreur != 0){
                     nbrErreur += 1;
@@ -27,9 +26,8 @@ public class TestCosinusAleatoire {
                         nbrErreurUlp += 1;
                     }
                 }
-            }
+            };
             System.out.println(nbrErreur);
-            System.out.println(nbrErreurUlp);
         }
     }        
 }
