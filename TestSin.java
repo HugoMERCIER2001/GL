@@ -7,17 +7,18 @@ public class TestSin {
     public static void main(String[] args) {
         //int numberOfValue = 1000;
         //Random random = new Random();
-        Float test0 = Float.valueOf((float) 0.00000000);//On test pour 0;
-        Float test1 = Float.valueOf((float) 0.28135902);//valeur erreur = ulp 1
-        Float test2 = Float.valueOf((float) 0.4605053); //valeur erreur = ulp 2
-        Float test3 = Float.valueOf((float) 0.5665219); //valeur erreur = ulp 3
-        Float test4 = Float.valueOf((float) 0.079188466); //passe
-        Float test5 = Float.valueOf((float) 0.48998064); //passe
-        Float test6 = Float.valueOf((float) 0.36382526); //passe
-        Float test7 = Float.valueOf((float) 0.4123013); //valeur erreur = ulp 4
-        Float test8 = Float.valueOf((float) 0.7132736);
-        Float test9 = Float.valueOf((float) 0.843436);
-        Float test10 = Float.valueOf((float) Math.PI / 2);
+        Float test0 = Float.valueOf((float) 0.60000000);//On pour une valeur entre 0 et 1.
+        Float test1 = Float.valueOf((float) -0.53636355);//On teste pour une valeur entre -1 et 0.
+        Float test2 = Float.valueOf((float) 1.86475346); //On teste pour une valeur entre 1 et 2.
+        System.out.println(Math.sin(5.412301) + " " + Math.sin(0.8708844));
+        Float test3 = Float.valueOf((float) -1.8536894); //On test pour une valeur entre -1 et -2.
+        Float test4 = Float.valueOf((float) -2.3535783); //On test pour une valeur entre -2 et -3.
+        Float test5 = Float.valueOf((float) 2.5356673); //On test pour une valeur entre 2 et 3.
+        Float test6 = Float.valueOf((float) 4.4656366);
+        Float test7 = Float.valueOf((float) 5.4123013); 
+        Float test8 = Float.valueOf((float) 6.7132736);
+        Float test9 = Float.valueOf((float) 7.600);
+        Float test10 = Float.valueOf((float) 8.500);
         List<Float> floatList = new ArrayList<>();
         floatList.add(test0);
         floatList.add(test1);
@@ -36,11 +37,13 @@ public class TestSin {
             //Flottant Test1 = new Flottant(random.nextFloat());
             Flottant Test1 = new Flottant(floatList.get(i));
             System.out.println("Float " + Test1.getX());
-            float erreur = Test1.getSinus() - (float) Math.sin((double) Test1.getX());
-            Flottant Sinus = new Flottant(Test1.getSinus());
-            System.out.println("Et l'ULP du sinus vaut : " + Sinus.getUlp());
-            System.out.println("sinus attendu " + (float) Math.sin((double) Test1.getX()));
+            Flottant TestSauv = new Flottant(floatList.get(i));
+            float erreur = Test1.getRealSinus() - (float) Math.sin((double) TestSauv.getX());
+            //System.out.println("Et l'ULP du sinus vaut : " + Sinus.getUlp());
+            //System.out.println("sinus attendu " + (float) Math.sin((double) Test1.getX()));
+            Flottant Sinus = new Flottant((float) Math.sin((double) TestSauv.getX()));
             System.out.println("l'écart de l'erreur est de :" + erreur);
+            System.out.println("l'ulp du sinus vaut : " + Sinus.getUlp());
             System.out.println("---------------------------------------------------");
             if(erreur != 0){
                 nbrErreur += 1;

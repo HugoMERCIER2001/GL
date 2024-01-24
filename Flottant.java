@@ -88,39 +88,49 @@ public class Flottant{
     public float getRealSinus(){
         int coefficient = 1;
         //On vérifie si on est entre 0 et 1 :
-        if (this.getAbsX() <= 1.0f && this.getAbsX() >= 0.0f){
-                return this.getSinus();
+        if (this.getX() <= 1.0f && this.getX() >= 0.0f){
+            System.out.println("on a trouvé que le flottant " + this.getX()  + " était entre -1 et 1, on renvoi simplement le faux sinus");
+            return this.getSinus();
         }
-        //On vérifie si on est entre [-Pi/2, -1] U [1, PI/2] :
-        if(this.getAbsX() <= ((float) Math.PI / 2) && this.getAbsX() > 1.0f){
-            float newx = (float) Math.PI / 2 - this.getAbsX();
-            if(this.getX() >= 0){
-                this.setX(newx);
-                return this.getCosinus();
-            }
-            else{
-                this.setX(newx);
-                return -this.getSinus();
-            }
+
+        if (this.getX() > 1.0f && this.getX() <= ((float) Math.PI / 2)){
+            float newx = ((float) Math.PI / 2) - this.getX();
+            this.setX(newx);
+            return this.getCosinus();
         }
-        //On vérifie si c'est entre -Pi et Pi
-        if(this.getX() <= (float) Math.PI && this.getX() >= - (float) Math.PI){
-            //Si entre [Pi/2, PI]
-            if(this.getX() > 0){
+
+        //On vérifie si on est entre [PI/2, PI] :
+        if(this.getX() > ((float) Math.PI / 2) && this.getX() <= ((float) Math.PI)){
+                System.out.println("on a trouvé que le flottant " + this.getX() + " était entre 1 et Pi/2, on renvoi simplement le faux cosinus");
                 float newx = (float) Math.PI - this.getX();
                 this.setX(newx);
                 return this.getRealSinus();
-            }
-            else{
-                float newx = (float) Math.PI - this.getAbsX();
+
+        }
+        //On vérifie si c'est entre [Pi; 2 pi]
+        if(this.getX() > (float) Math.PI && this.getX() <= 2 * (float) Math.PI){
+                System.out.println("on a trouvé que le flottant " + this.getX() + " était entre Pi/2 et PI, on renvoi Real sinus de (PI - x)");
+                float newx = this.getX() - (float) Math.PI;
+                System.out.println(newx);
                 this.setX(newx);
                 return -this.getRealSinus();
-            }
         }
-        //Maintenant si la valeur est pas entre -Pi et Pi
+        //Maintenant si la valeur est pas entre 0 et 2 PI
         else{
-            float newx = this.getX() % ((float) Math.PI) - (float) Math.PI;
+            System.out.println("On trouve maintenant que la nouvelle valeure n'est pas entre [-Pi; Pi], on revoi Realsinus de x [2Pi] - Pi");
+            float newx = 0.0f;
+            if(this.getX() < 0){
+                newx = this.getX();
+                while(newx < 0){
+                    newx =(2 * (float) Math.PI) + newx;
+                }
+            }
+            else{
+                newx = this.getX() % (2 * (float) Math.PI);
+            }
+            System.out.println("newx = " + (newx));
             this.setX(newx);
+            //Flottant Sinus = new Flottant(this.getRealSinus());
             return this.getRealSinus();
         }
     }
@@ -132,24 +142,16 @@ public class Flottant{
         //    this.setX(this.getAbsX() / 4);
         //}
         float somme = 0.0f;//On initialise la somme à 0.
-        float terme = 1.0f;//On commence avec le terme pour n = 0 dans le développement en série entière du sinus.
-        Flottant sommeFlottant = new Flottant(somme);//typa en Flottant obligatoire pour la méthode getUlp.
-        int compteur = 0;
-        ArrayList<Float> listeTerms = new ArrayList<>();
-        while((sommeFlottant.getUlp()) <= (float) Math.abs(terme) || compteur <= 15){ //Tant que U_n <= a_n ...
-            somme += terme;
-            listeTerms.add(terme);
-            compteur += 1;
+        float terme = 0.0f;//On commence avec le terme pour n = 0 dans le développement en série entière du sinus.//typa en Flottant obligatoire pour la méthode getUlp.
+        int compteur = 5;
+        while(compteur >= 0){ //Tant que U_n <= a_n ...
             float terme1 = (float) Math.pow(-1, compteur);
             float terme2 = (float) Math.pow(this.x, 2 * compteur)/this.factorielle(2 * compteur);
             terme = terme1 * terme2;
-            sommeFlottant.setX(somme);
+            somme += terme;
+            compteur -= 1;
         }
-        float sommeFinale = 0.0f;
-        for (int i = listeTerms.size() - 1; i >= 0; i--){
-            sommeFinale += listeTerms.get(i);
-        }
-        return sommeFinale;
+        return somme;
     }
 }
 

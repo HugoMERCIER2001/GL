@@ -22,12 +22,13 @@ public class TestCosinusAleatoire {
                 Flottant Cosinus = new Flottant(Test1.getCosinus());
                 if(erreur != 0){
                     nbrErreur += 1;
+                    valeurs += RandomFloat + ", ";
                     if(Math.abs(erreur) == Cosinus.getUlp()){
                         nbrErreurUlp += 1;
                     }
                 }
             };
-            System.out.println(nbrErreur);
+            System.out.println(valeurs);
         }
     }        
 }
